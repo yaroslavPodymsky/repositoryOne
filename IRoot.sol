@@ -16,7 +16,9 @@ interface IRoot {
         uint128 initialAmount
     ) external returns (address addrWallet);
 }
-
+//some comments
+//some commentsaaaaa
+//aaaaaaaaaaaaa
 interface IRootCb {
     function getDataCb(RootData rootData) external;
 }
