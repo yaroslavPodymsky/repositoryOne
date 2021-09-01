@@ -18,7 +18,6 @@ interface IRoot {
 }
 //some comments
 //some comments
-//some comments
 interface IRootCb {
     function getDataCb(RootData rootData) external;
 }
