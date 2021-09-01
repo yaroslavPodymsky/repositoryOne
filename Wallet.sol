@@ -90,7 +90,7 @@ contract Wallet is IWallet {
     ) private inline view returns (TvmCell) {
         return tvm.buildStateInit({
             contr: Wallet,
-            varInit: {
+            varInit:  {
                 _addrRoot: _addrRoot,
                 _pubkeyOwner: pubkeyOwner,
                 _addrOwner: addrOwner
