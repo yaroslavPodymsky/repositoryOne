@@ -1,0 +1,20 @@
+@startuml Grant
+header Grant
+title Grant-sequence
+skinparam maxMessageSize 200
+skinparam guillemet true
+autonumber
+actor "Sender" #white
+participant "Root"
+participant "Grant" 
+
+Sender --> Root
+Root --> Grant
+activate Grant
+Grant --> Grant:проверка адресса отправителя
+Grant --> Grant:проверка баланса
+Grant --> Grant:проверка адресса кошелька
+Grant --> Root:пополняет кошелек
+deactivate Grant
+
+@enduml

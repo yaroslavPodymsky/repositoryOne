@@ -1,0 +1,71 @@
+@startuml DeTrace
+header DeTrace
+title DeTrace Creature connection
+skinparam maxMessageSize 200
+skinparam guillemet true
+autonumber
+
+participant "Wheel_1" as C <<Creature: Wheel>>
+participant "Wheel_1" as B <<Creature: BBBBB>>
+participant "Wheel_2" as C_1 <<Creature: Wheel>>
+
+activate C
+activate B
+activate B_1
+activate C_1
+
+
+
+C -> C_1 : changeOwner
+C_1 -> C_1 : checkMatrix
+C_1 -> C_1 : checkSlot
+C_1 -> C_1 : checkOwner
+C_1 -X C : connectError
+
+B -> B_1 : cdcdcdcdcd
+
+deactivate C_1
+deactivate C
+
+deactivate B_1
+deactivate B
+
+autonumber
+
+participant "Wheel_3" as C_2 <<Creature: Wheel>>
+participant "Wheel_4" as C_3 <<Creature: Wheel>>
+participant "Wheel_5" as C_4 <<Creature: Wheel>>
+
+participant "Frame" as F <<Creature: Frame>>
+
+activate F
+activate C_2
+
+C_2 -> F : changeOwner
+F -> F : checkMatrix
+F -> F : checkOwner
+F -> F : checkSlot
+F -> C_2 : connect
+
+deactivate C_2
+activate C_3
+
+C_3 -> F : changeOwner
+F -> F : checkMatrix
+F -> F : checkOwner
+F -> F : checkSlot
+F -> C_3 : connect
+
+deactivate C_3
+activate C_4
+
+C_4 -> F : changeOwner
+F -> F : checkMatrix
+F -> F : checkOwner
+F -> F : checkSlot
+F -x C_4 : connect
+
+deactivate C_4
+deactivate F
+
+@enduml

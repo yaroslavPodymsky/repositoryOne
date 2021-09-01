@@ -1,0 +1,67 @@
+@startuml DeTrace_Class
+
+skinparam WrapWidth 250
+skinparam classAttributeIconSize 0
+
+class Factory{
+  ' -_addrOwner: address
+  ' -_addrAuthor: address
+  ' -_addrParent: address
+  ' -_type: string
+  ' -_struct status_slots: {bool, uint32}
+  ' -_matrix: mapping(string => status_slots)
+  -{field}_objTypes: string[]
+  -{field}_objMatrix: mapping(string => Matrix)
+
+  -{field}_createFrame(prop: FrameProp)
+  -{field}_createWheel(prop: WheelProp)
+  ' -_unite(addrLhs: address, addrRhs: address)
+  ' -_divide(addrLhs: address, addrRhs: address): address, address
+}
+
+abstract Object {
+  -_addrOwner: address
+  -_addrAuthor: address
+  ' -_addrParent: address
+  -_type: string
+  -_slots: Slots
+  -_matrix: Matrix
+  -_props: ObjProps
+  ..initialData..
+  -{static} _id: uint256
+  -{static} _VIN: string
+  --
+  +constructor(addrOwner: address)
+  +changeOwner(addrTo: address)
+  +_unite(addrTo: address)
+  +_divide(addrTo: address)
+  ..getters..
+  +getOwner(): address
+  ' +checkOwner(_addr: address): bool
+  ' +checkMatrix(type: string): bool
+  ' +checkSlot(type: string): bool
+  ' +checkParent(): bool
+  +getInfo(): address, address, string, mapping(string => defi)
+}
+
+class Frame{
+  -_type: "frame"
+  -_slots: FrameSlots
+  -{field}_matrix: FrameMatrix
+  -_props: FrameProps
+}
+
+class Wheel{
+  -_type: "wheel"
+  -_slots: WheelSlots
+  -{field}_matrix: WheelMatrix
+  -_props: WheelMatrix
+}
+
+Factory ..> Frame
+Factory ..> Wheel
+
+Frame ..|> Object
+Wheel ..|> Object
+
+@enduml

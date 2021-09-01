@@ -1,0 +1,23 @@
+@startuml Root
+header Root
+title Root-sequence
+skinparam maxMessageSize 200
+skinparam guillemet true
+autonumber
+actor "Sender" #black
+participant "Root"
+participant "Wallet"
+
+Sender --> Root
+activate Root
+Root -[#0000FF]-> Root : проверяет наличие кошелька 
+Root -[#0000FF]-> Root : проверяет адреса
+Root --> Wallet : разворачивает кошелек
+activate Wallet
+Wallet -[#0000FF]-> Wallet : проверяет владельца
+Wallet -[#0000FF]-> Wallet : проверяет баланса 
+Wallet --> Root : build Wallet State
+deactivate Wallet
+Root --> Sender : пополняет кошелек
+deactivate Root
+@enduml

@@ -1,0 +1,17 @@
+@startuml Quvvino
+header Quvvino
+title Quvvino-integration-sequence
+skinparam maxMessageSize 200
+skinparam guillemet true
+autonumber
+actor "User" 
+participant "Surf" 
+participant "Debot"
+participant "Root"
+User --> Surf ++: 
+Surf --> Debot ++: run debot
+Debot --> Debot: check wallet existence
+Debot --> Root ++: deploy wallet
+Root --> Debot: wallet address
+deactivate Root
+@enduml

@@ -1,0 +1,68 @@
+@startuml Root
+skinparam WrapWidth 250
+skinparam classAttributeIconSize 0
+
+
+
+
+class Root{
+  +_rootData: RootData
+  +_pubkeyOwner: uint256
+  +_addrOwner: address
+  +_totalGranted: uint128
+
+    -_checkAmount (amount:uint128)
+    +uploadWalletCode (codeWallet:TvmCell)
+    +deployWallet (pubkeyOwner:uint256, addrOwner:address,
+    initialAmount:uint128):address
+    +grant(addrWallet:address, amount:uint128)
+}
+
+class Wallet{
+{static} +_addrRoot: address
+{static} +_pubkeyOwner: uint256
+{static} +_addrOwner: address
++_balance:uint128
+
+    +_checkAmount(amount:uint128)
+    +transfer (addrWallet:address, amount:uint128)
+    +recieve (amount:uint128, pubkeyOwner:uint256, addrOwner:address)
+    +resolveWallet (pubkeyOwner:uint256, addrOwner:address):address
+    +_buildWalletState (pubkeyOwner:uint256, addrOwner:address):TvmCell
+
+}
+
+class WalletResolver{
+  +_codeWallet: TvmCell
+    +resolveWallet (addrRoot:address, pubkeyOwner:uint256, addrOwner:address):address
+    +_buildWalletState (addrRoot:address, pubkeyOwner:uint256, addrOwner:address):TvmCell
+}
+
+together {
+class RootData <<(S, orchid)>>  {
++name:string
++symbol:string
++icon:string
++desc:string
++decimals:uint8
++totalSupply:uint128
+}
+
+interface IRoot {
+    +deployWallet (pubkeyOwner:uint256, addrOwner:address, initialAmount:uint128):address
+}
+}
+interface IWallet{
+    +transfer (addrWallet:address, amount:uint128)
+    +recieve (amount:uint128, pubkeyOwner:uint256, addrOwner:address)
+}
+
+
+
+
+Root --> WalletResolver
+Root ..|> IRoot
+Root ..> Wallet
+RootData ..|> Root
+Wallet ..|> IWallet
+@enduml
