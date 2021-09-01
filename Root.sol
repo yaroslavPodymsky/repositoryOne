@@ -96,7 +96,7 @@ contract Root is IRoot, WalletResolver {
         
         _totalGranted += initialAmount;
 
-        return addrWallet;
+        return addrWallet ;
     }
 
 /* -------------------------------------------------------------------------- */
